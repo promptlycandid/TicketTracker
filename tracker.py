@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
+from tkinter.commondialog import Dialog
 from tkcalendar import Calendar, DateEntry
 
 import pandas as pd 
@@ -14,12 +15,61 @@ root.title("Ticket Tracker")
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.pack()
 
-frame1 = tk.LabelFrame(root)
-frame1.place(rely=0, relx=0, relwidth=1, relheight=1)
+frame1 = tk.Frame(root, height=HEIGHT, width=WIDTH)
+frame1.place(rely=0.05, relx=0, relwidth=1, relheight=1)
+
+menu_frame = tk.Frame(root)
+menu_frame.place(rely=0, relx=0, relwidth=1, relheight=0.05)
 
 background_image = tk.PhotoImage(file='ProfilePic.png')
 background_label = tk.Label(frame1, image=background_image, bg='#E15F5F')
 background_label.place(relwidth=1, relheight=1)
+
+### Build Menu ###
+
+class Message(Dialog):
+    "A message box"
+
+    command  = "tk_messageBox"
+
+def _show(title=None, message=None, _icon=None, _type=None, **options):
+    if _icon and "icon" not in options:    options["icon"] = _icon
+    if _type and "type" not in options:    options["type"] = _type
+    if title:   options["title"] = title
+    if message: options["message"] = message
+    res = Message(**options).show()
+    if isinstance(res, bool):
+        if res:
+            return YES
+        return NO
+    return str(res)
+
+def aboutTracker(title="About Ticket Tracker", message="Ticket Tracker \n Version 1.0 \n Copyright 2020"):
+	"Shows info about ticket tracker"
+	return _show(title, message)
+
+
+menubar = tk.Menu(menu_frame)
+
+
+
+# File Menu
+fileMenu = tk.Menu(menubar, tearoff=0)
+fileMenu.add_separator()
+fileMenu.add_command(label="Exit", command=root.quit)
+menubar.add_cascade(label="File", menu=fileMenu)
+
+# Edit Menu
+
+# Help Menu
+helpMenu = tk.Menu(menubar, tearoff=0)
+helpMenu.add_command(label="About", command=aboutTracker)
+
+menubar.add_cascade(label="Help", menu=helpMenu)
+
+root.config(menu=menubar)
+
+
 
 
 
@@ -268,29 +318,29 @@ def openTickets():
 
 # Ticket Tracker main menu buttons
 
-button1 = tk.Button(root, text='New Ticket', command=newTicket)
-button1.place(rely=0, relx=0, relwidth=0.30, relheight=0.30)
+button1 = tk.Button(frame1, text='New Ticket', command=newTicket, bd=5)
+button1.place(rely=0.01, relx=0, relwidth=0.30, relheight=0.30)
 button1.config(font=("Helvetica", 18))
 
 
-button2 = tk.Button(root, text='View Tickets', command=viewTickets)
-button2.place(rely=0, relx=0.35, relwidth=0.30, relheight=0.30)
+button2 = tk.Button(frame1, text='View Tickets', command=viewTickets, bd=5)
+button2.place(rely=0.01, relx=0.35, relwidth=0.30, relheight=0.30)
 button2.config(font=("Helvetica", 18))
 
-button3 = tk.Button(root, text='Open Tickets', command=openTickets)
-button3.place(rely=0, relx=0.70, relwidth=0.30, relheight=0.30)
+button3 = tk.Button(frame1, text='Open Tickets', command=openTickets, bd=5)
+button3.place(rely=0.01, relx=0.70, relwidth=0.30, relheight=0.30)
 button3.config(font=("Helvetica", 18))
 
-button4 = tk.Button(root, text='Edit Ticket', command=root.quit)
-button4.place(rely=1, relx=0,  relwidth=0.30, relheight=0.30, anchor='sw')
+button4 = tk.Button(frame1, text='Edit Ticket', command=root.quit, bd=5)
+button4.place(rely=0.94, relx=0,  relwidth=0.30, relheight=0.30, anchor='sw')
 button4.config(font=("Helvetica", 18))
 
-button5 = tk.Button(root, text='Close Ticket', command=root.quit)
-button5.place(rely=1, relx=0.35,  relwidth=0.30, relheight=0.30, anchor='sw')
+button5 = tk.Button(frame1, text='Close Ticket', command=root.quit, bd=5)
+button5.place(rely=0.94, relx=0.35,  relwidth=0.30, relheight=0.30, anchor='sw')
 button5.config(font=("Helvetica", 18))
 
-button6 = tk.Button(root, text='Quit', command=root.quit)
-button6.place(rely=1, relx=0.70,  relwidth=0.30, relheight=0.30, anchor='sw')
+button6 = tk.Button(frame1, text='Quit', command=root.quit, bd=5)
+button6.place(rely=0.94, relx=0.70,  relwidth=0.30, relheight=0.30, anchor='sw')
 button6.config(font=("Helvetica", 18))
 
 

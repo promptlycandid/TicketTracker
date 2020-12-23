@@ -1,27 +1,33 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
+from tkcalendar import Calendar, DateEntry
 
 import pandas as pd 
 
 # Build the widget
-class App(tk.Frame):
-	def __init__(self, master=None):
-		super().__init__(master)
-		self.pack()
+master = tk.Tk()
+master.geometry("1000x500")
+master.pack_propagate(False)
+master.resizable(0, 0)
+master.title("Ticket Tracker")
+master.configure(bg="#F9EBEA")
 
-master = App()
-
-# Window configurations
-master.master.title("Ticket Tracker")
-master.master.geometry("1000x500")
-#master.configure(bg="#F9EBEA")
+frame1 = tk.LabelFrame(master, text="Ticket Tracker")
+frame1.place(height=500, width=1000)
 
 
 ############# FUNCTIONS #####################################################
 
 ### New Ticket Function ###
 def newTicket():
-	nTicket = App()
+	nTicket = tk.Tk()
+	nTicket.geometry("800x600")
+	nTicket.pack_propagate(False)
+	nTicket.resizable(0, 0)
+	nTicket.title("New Ticket")
+
+	nFrame1 = tk.LabelFrame(nTicket, text=None)
+	nFrame1.place(width=800, height=600)
 
 	# Submit button function
 	def submitTicket():
@@ -77,37 +83,78 @@ def newTicket():
 		entry8.delete(0, tk.END)
 
 	# Create widget labels
-	ttk.Label(nTicket, text="Location", ).grid(row=0, pady=4)
-	ttk.Label(nTicket, text="Priority").grid(row=1, pady=4)
-	ttk.Label(nTicket, text="Open Date").grid(row=2, pady=4)
-	ttk.Label(nTicket, text="Issue").grid(row=3, pady=4)
-	ttk.Label(nTicket, text="Tech").grid(row=4, pady=4)
-	ttk.Label(nTicket, text="Fix").grid(row=5, pady=4)
-	ttk.Label(nTicket, text="Fix Date").grid(row=6, pady=4)
-	ttk.Label(nTicket, text="Closed").grid(row=7, pady=4)
+	label1 = ttk.Label(nTicket, text="Location")
+	label1.place(rely=0.1, relx=0.25, anchor='center')
+	label1.config(font=("Helvetica", 16))
+
+	label2 = ttk.Label(nTicket, text="Priority")
+	label2.place(rely=0.2, relx=0.25, anchor='center')
+	label2.config(font=("Helvetica", 16))
+
+	label3 = ttk.Label(nTicket, text="Open Date")
+	label3.place(rely=0.3, relx=0.25, anchor='center')
+	label3.config(font=("Helvetica", 16))
+
+	label4 = ttk.Label(nTicket, text="Issue")
+	label4.place(rely=0.4, relx=0.25, anchor='center')
+	label4.config(font=("Helvetica", 16))
+
+	label5 = ttk.Label(nTicket, text="Tech")
+	label5.place(rely=0.5, relx=0.25, anchor='center')
+	label5.config(font=("Helvetica", 16))
+
+	label6 = ttk.Label(nTicket, text="Fix")
+	label6.place(rely=0.6, relx=0.25, anchor='center')
+	label6.config(font=("Helvetica", 16))
+
+	label7 = ttk.Label(nTicket, text="Fix Date")
+	label7.place(rely=0.7, relx=0.25, anchor='center')
+	label7.config(font=("Helvetica", 16))
+
+	label8 = ttk.Label(nTicket, text="Closed")
+	label8.place(rely=0.8, relx=0.25, anchor='center')
+	label8.config(font=("Helvetica", 16))
 
 	# Create widget data entry fields
 	entry1 = ttk.Entry(nTicket)
-	entry2 = ttk.Entry(nTicket)
-	entry3 = ttk.Entry(nTicket)
-	entry4 = ttk.Entry(nTicket)
-	entry5 = ttk.Entry(nTicket)
-	entry6 = ttk.Entry(nTicket)
-	entry7 = ttk.Entry(nTicket)
-	entry8 = ttk.Entry(nTicket)
+	entry1.place(rely=0.1, relx=0.75, anchor='center', width=350, height=50)
+	entry1.config(font=("Helvetica", 14,))
 
-	# Place data entry fields in widget
-	entry1.grid(row=0, column=1)
-	entry2.grid(row=1, column=1)
-	entry3.grid(row=2, column=1)
-	entry4.grid(row=3, column=1)
-	entry5.grid(row=4, column=1)
-	entry6.grid(row=5, column=1)
-	entry7.grid(row=6, column=1)
-	entry8.grid(row=7, column=1)
+	entry2 = ttk.Entry(nTicket)
+	entry2.place(rely=0.2, relx=0.75, anchor='center', width=350, height=50)
+	entry2.config(font=("Helvetica", 14,))
+
+	# entry3 = ttk.Entry(nTicket)
+	entry3 = DateEntry(nTicket)
+	entry3.place(rely=0.3, relx=0.75, anchor='center', width=350, height=50)
+	entry3.config(font=("Helvetica", 14,))
+
+	entry4 = ttk.Entry(nTicket)
+	entry4.place(rely=0.4, relx=0.75, anchor='center', width=350, height=50)
+	entry4.config(font=("Helvetica", 14,))
+
+	entry5 = ttk.Entry(nTicket)
+	entry5.place(rely=0.5, relx=0.75, anchor='center', width=350, height=50)
+	entry5.config(font=("Helvetica", 14,))
+
+	entry6 = ttk.Entry(nTicket)
+	entry6.place(rely=0.6, relx=0.75, anchor='center', width=350, height=50)
+	entry6.config(font=("Helvetica", 14,))
+
+	entry7 = DateEntry(nTicket)
+	entry7.place(rely=0.7, relx=0.75, anchor='center', width=350, height=50)
+	entry7.config(font=("Helvetica", 14,))
+	entry7.delete(0, tk.END)
+
+	entry8 = ttk.Entry(nTicket)
+	entry8.place(rely=0.8, relx=0.75, anchor='center', width=350, height=50)
+	entry8.config(font=("Helvetica", 14,))
+
 
 	# Create button to submit data to worksheet
-	tk.Button(nTicket, text='Submit', command=submitTicket, height=2, width=50, bg="#AED6F1").grid(row=9, column=1, pady=4)
+	cButton = tk.Button(nTicket, text='Submit', command=submitTicket, height=2, width=50, bg="#AED6F1")
+	cButton.config(font=("Helvetica", 16))
+	cButton.place(rely=0.9, relx=0.5, anchor='center', width=700, height=50)
 
 
 ### TODO: View Tickets Function ###
@@ -213,12 +260,33 @@ def openTickets():
 
 
 # Ticket Tracker main menu buttons
-tk.Button(master, text='New Ticket', command=newTicket).grid(row=6, column=0, pady=4)
-tk.Button(master, text='View Tickets', command=viewTickets).grid(row=6, column=1, pady=4)
-tk.Button(master, text='Open Tickets', command=openTickets).grid(row=6, column=2, pady=4)
+
+button1 = tk.Button(master, text='New Ticket', command=newTicket)
+button1.place(rely=0.25, relx=0.20, anchor='center', height=125, width=250)
+button1.config(font=("Helvetica", 18))
+
+
+button2 = tk.Button(master, text='View Tickets', command=viewTickets)
+button2.place(rely=0.25, relx=0.50, anchor='center', height=125, width=250)
+button2.config(font=("Helvetica", 18))
+
+button3 = tk.Button(master, text='Open Tickets', command=openTickets)
+button3.place(rely=0.25, relx=0.80, anchor='center', height=125, width=250)
+button3.config(font=("Helvetica", 18))
+
 # TODO: tk.Button(master, text='Edit Ticket', command=editTicket).grid(row=6, column=3, pady=4)
+button4 = tk.Button(master, text='Edit Ticket', command=master.quit)
+button4.place(rely=0.75, relx=0.20, anchor='center', height=125, width=250)
+button4.config(font=("Helvetica", 18))
+
 # TODO: tk.Button(master, text='Close Ticket', command=closeTicket).grid(row=6, column=4, pady=4)
-tk.Button(master, text='Quit', command=master.quit).grid(row=6, column=5, pady=4)
+button5 = tk.Button(master, text='Close Ticket', command=master.quit)
+button5.place(rely=0.75, relx=0.50, anchor='center', height=125, width=250)
+button5.config(font=("Helvetica", 18))
+
+button6 = tk.Button(master, text='Quit', command=master.quit)
+button6.place(rely=0.75, relx=0.80, anchor='center', height=125, width=250)
+button6.config(font=("Helvetica", 18))
 
 
 

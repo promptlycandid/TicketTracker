@@ -70,9 +70,11 @@ class Application(tk.Frame):
 		# BUTTONS
 
 		self.submit_button = tk.Button(self.frame1, text="Submit", command=self.Submit_Ticket)
-		self.submit_button.place(rely=1, relx=0.70, relheight=0.1, relwidth=0.1, anchor='se')
+		self.submit_button.place(rely=1, relx=0.55, relheight=0.1, relwidth=0.1, anchor='se')
 		self.save_button = tk.Button(self.frame1, text="Save")
-		self.save_button.place(rely=1, relx=0.85, relheight=0.1, relwidth=0.1, anchor='se')
+		self.save_button.place(rely=1, relx=0.70, relheight=0.1, relwidth=0.1, anchor='se')
+		self.delete_button = tk.Button(self.frame1, text="Delete", command=self.Delete_Ticket)
+		self.delete_button.place(rely=1, relx=0.85, relheight=0.1, relwidth=0.1, anchor='se')		
 		self.exit_button = tk.Button(self.frame1, text="Exit", command=self.root.quit)
 		self.exit_button.place(rely=1, relx=1, relheight=0.1, relwidth=0.1, anchor='se')
 
@@ -121,6 +123,10 @@ class Application(tk.Frame):
 		self.fix_entry.delete(0, tk.END)
 		self.fixDate_entry.delete(0, tk.END)
 		self.closed_entry.deselect()
+
+	def Delete_Ticket(self):
+		ticket_num = int(self.tree.focus())
+		self.treeview.delete(ticket_num)
 
 
 app = Application(tk.Tk())

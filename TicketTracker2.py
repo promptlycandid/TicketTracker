@@ -1,6 +1,7 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, filedialog
 from tkcalendar import Calendar, DateEntry
+from collections import defaultdict
 
 import pandas as pd
 
@@ -133,6 +134,20 @@ class Application(tk.Frame):
 		self.fix_entry.delete(0, tk.END)
 		self.fixDate_entry.delete(0, tk.END)
 		self.closed_entry.deselect()
+
+	# def Save_Function(self):
+	# 	self.file = filedialog.asksaveasfilename(title="Select File", "Ticket Tracker.ods", filetypes=[("ODS File", "*.ods")])
+	# 	if self.file:
+	# 		self.ids = self.tree.get_children()
+	# 		dict = defaultdict(list)
+	# 		dict = pd.DataFrame.from_dict(dict)
+
+	# 		try:
+	# 			dict.to_excel(file, index=False)
+	# 		except:
+	# 			print("Close the file than retry")
+	# 	else:
+	# 		print("You did not save the file")
 
 	def Delete_Ticket(self):
 		ticket_num = int(self.tree.focus())

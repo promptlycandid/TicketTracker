@@ -5,7 +5,7 @@ from tkcalendar import Calendar, DateEntry
 import pandas as pd
 
 HEIGHT = 1000
-WIDTH = 1000
+WIDTH = 1200
 
 class Application(tk.Frame):
 	def __init__(self, root):
@@ -25,7 +25,7 @@ class Application(tk.Frame):
 		self.frame1.place(rely=0, relx=0, relheight=0.4, relwidth=1)
 
 		self.frame2 = tk.Frame(self.root, bg='#eda9c2', bd=5)
-		self.frame2.place(rely=0.4, relx=0, relheight=0.8, relwidth=1)
+		self.frame2.place(rely=0.4, relx=0, relheight=0.6, relwidth=1)
 
 		# LABELS
 
@@ -70,11 +70,11 @@ class Application(tk.Frame):
 		# BUTTONS
 
 		self.submit_button = tk.Button(self.frame1, text="Submit", command=self.Submit_Ticket)
-		self.submit_button.place(rely=1, relx=0.55, relheight=0.1, relwidth=0.1, anchor='se')
+		self.submit_button.place(rely=1, relx=0.70, relheight=0.1, relwidth=0.1, anchor='se')
 		self.save_button = tk.Button(self.frame1, text="Save")
-		self.save_button.place(rely=1, relx=0.70, relheight=0.1, relwidth=0.1, anchor='se')
+		self.save_button.place(rely=1, relx=0.85, relheight=0.1, relwidth=0.1, anchor='se')
 		self.delete_button = tk.Button(self.frame1, text="Delete", command=self.Delete_Ticket)
-		self.delete_button.place(rely=1, relx=0.85, relheight=0.1, relwidth=0.1, anchor='se')		
+		self.delete_button.place(rely=1, relx=0, relheight=0.1, relwidth=0.1, anchor='sw')		
 		self.exit_button = tk.Button(self.frame1, text="Exit", command=self.root.quit)
 		self.exit_button.place(rely=1, relx=1, relheight=0.1, relwidth=0.1, anchor='se')
 
@@ -106,8 +106,18 @@ class Application(tk.Frame):
 		self.tree.place(rely=0, relx=0, relwidth=1, relheight=1)	
 		self.treeview = self.tree
 
+		self.treescrolly = tk.Scrollbar(self.frame2, orient="vertical", command=self.tree.yview)
+		self.treescrollx = tk.Scrollbar(self.frame2, orient="horizontal", command=self.tree.xview)
+		self.tree.configure(xscrollcommand=self.treescrollx.set, yscrollcommand=self.treescrolly.set)
+		self.treescrollx.pack(side="bottom", fill="x")
+		self.treescrolly.pack(side="right", fill="y")
+
 		self.id = 1
 		self.iid = 1
+
+	# ======================================================================
+	# BUTTON FUNCTIONS
+	# ======================================================================
 
 	def Submit_Ticket(self):
 		self.treeview.insert('', 'end', iid=self.iid, text=self.id, values=(self.location_entry.get(), self.priority_entry.get(), self.openDate_entry.get(), self.issue_entry.get(), self.tech_entry.get(), self.fix_entry.get(), self.fixDate_entry.get(), self.closedEntry.get()))
@@ -127,6 +137,10 @@ class Application(tk.Frame):
 	def Delete_Ticket(self):
 		ticket_num = int(self.tree.focus())
 		self.treeview.delete(ticket_num)
+
+	def Update(self):
+		for idx, node in enumerate(self.treeview.get_children()):
+			self.tree.item(node)
 
 
 app = Application(tk.Tk())

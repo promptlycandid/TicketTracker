@@ -22,30 +22,30 @@ class Application(tk.Frame):
 
 		# FRAMES
 
-		self.frame1 = tk.Frame(self.root, bd=5)
+		self.frame1 = tk.Frame(self.root, bg='#ed174b', bd=5)
 		self.frame1.place(rely=0, relx=0, relheight=0.4, relwidth=1)
 
-		self.frame2 = tk.Frame(self.root, bg='#eda9c2', bd=5)
+		self.frame2 = tk.Frame(self.root, bg='#ed174b', bd=5)
 		self.frame2.place(rely=0.4, relx=0, relheight=0.6, relwidth=1)
 
 		# LABELS
 
-		self.location_label = ttk.Label(self.frame1, text="Location")
-		self.location_label.place(rely=0.1, relx=0.2, relheight=0.08, relwidth=0.25)
-		self.priority_label = ttk.Label(self.frame1, text="Priority")
-		self.priority_label.place(rely=0.2, relx=0.2, relheight=0.08, relwidth=0.25)
-		self.openDate_label = ttk.Label(self.frame1, text="Open Date")
-		self.openDate_label.place(rely=0.3, relx=0.2, relheight=0.08, relwidth=0.25)
-		self.issue_label = ttk.Label(self.frame1, text="Issue")
-		self.issue_label.place(rely=0.4, relx=0.2, relheight=0.08, relwidth=0.25)
-		self.tech_label = ttk.Label(self.frame1, text="Assigned Tech")
-		self.tech_label.place(rely=0.5, relx=0.2, relheight=0.08, relwidth=0.25)
-		self.fix_label = ttk.Label(self.frame1, text="Fix")
-		self.fix_label.place(rely=0.6, relx=0.2, relheight=0.08, relwidth=0.25)
-		self.fixDate_label = ttk.Label(self.frame1, text="Fix Date")
-		self.fixDate_label.place(rely=0.7, relx=0.2, relheight=0.08, relwidth=0.25)
-		self.closed_label = ttk.Label(self.frame1, text="Closed")
-		self.closed_label.place(rely=0.8, relx=0.2, relheight=0.08, relwidth=0.25)
+		self.location_label = ttk.Label(self.frame1, text="Location", anchor='c')
+		self.location_label.place(rely=0.1, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.priority_label = ttk.Label(self.frame1, text="Priority", anchor='c')
+		self.priority_label.place(rely=0.2, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.openDate_label = ttk.Label(self.frame1, text="Open Date", anchor='c')
+		self.openDate_label.place(rely=0.3, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.issue_label = ttk.Label(self.frame1, text="Issue", anchor='c')
+		self.issue_label.place(rely=0.4, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.tech_label = ttk.Label(self.frame1, text="Assigned Tech", anchor='c')
+		self.tech_label.place(rely=0.5, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.fix_label = ttk.Label(self.frame1, text="Fix", anchor='c')
+		self.fix_label.place(rely=0.6, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.fixDate_label = ttk.Label(self.frame1, text="Fix Date", anchor='c')
+		self.fixDate_label.place(rely=0.7, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.closed_label = ttk.Label(self.frame1, text="Closed", anchor='c')
+		self.closed_label.place(rely=0.8, relx=0.2, relheight=0.08, relwidth=0.1)
 
 		# ENTRY FIELDS
 
@@ -94,15 +94,19 @@ class Application(tk.Frame):
 		self.tree.heading('#7', text='Fix Date')
 		self.tree.heading('#8', text='Closed')
 
-		self.tree.column('#0', stretch=tk.YES)
-		self.tree.column('#1', stretch=tk.YES)
-		self.tree.column('#2', stretch=tk.YES)
-		self.tree.column('#3', stretch=tk.YES)
-		self.tree.column('#4', stretch=tk.YES)
-		self.tree.column('#5', stretch=tk.YES)
-		self.tree.column('#6', stretch=tk.YES)
-		self.tree.column('#7', stretch=tk.YES)
-		self.tree.column('#8', stretch=tk.YES)
+		for i in range(9):
+			x = ("#" + str(i))
+			self.tree.column(x, stretch=tk.YES)
+
+		# self.tree.column('#0', stretch=tk.YES)
+		# self.tree.column('#1', stretch=tk.YES)
+		# self.tree.column('#2', stretch=tk.YES)
+		# self.tree.column('#3', stretch=tk.YES)
+		# self.tree.column('#4', stretch=tk.YES)
+		# self.tree.column('#5', stretch=tk.YES)
+		# self.tree.column('#6', stretch=tk.YES)
+		# self.tree.column('#7', stretch=tk.YES)
+		# self.tree.column('#8', stretch=tk.YES)
 
 		self.tree.place(rely=0, relx=0, relwidth=1, relheight=1)	
 		self.treeview = self.tree
@@ -121,14 +125,23 @@ class Application(tk.Frame):
 	# ======================================================================
 
 	def Submit_Ticket(self):
-		self.treeview.insert('', 'end', iid=self.iid, text=self.id, values=(self.location_entry.get(), self.priority_entry.get(), self.openDate_entry.get(), self.issue_entry.get(), self.tech_entry.get(), self.fix_entry.get(), self.fixDate_entry.get(), self.closedEntry.get()))
+		# IF Statement to turn closed entry to Yes or No in table
+		self.closed_yn = self.closedEntry.get()
+		if self.closed_yn == 1:
+			self.closedYN = "Yes"
+		elif self.closed_yn == 0:
+			self.closedYN = "No"
 
+		# Insert entry fields into table
+		self.treeview.insert('', 'end', iid=self.iid, text=self.id, values=(self.location_entry.get(), self.priority_entry.get(), self.openDate_entry.get(), self.issue_entry.get(), self.tech_entry.get(), self.fix_entry.get(), self.fixDate_entry.get(), self.closedYN))
+
+		# Add one to the ticket number
 		self.iid = self.iid +1
 		self.id = self.id +1
 
+		# Delete fields
 		self.location_entry.delete(0, tk.END)
 		self.priority_entry.delete(0, tk.END)
-		self.openDate_entry.delete(0, tk.END)
 		self.issue_entry.delete(0, tk.END)
 		self.tech_entry.delete(0, tk.END)
 		self.fix_entry.delete(0, tk.END)

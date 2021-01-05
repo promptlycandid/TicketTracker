@@ -22,51 +22,51 @@ class Application(tk.Frame):
 
 		# FRAMES
 
-		self.frame1 = tk.Frame(self.root, bg='#96e4ff', bd=5)
+		self.frame1 = tk.Frame(self.root, bd=5) # bg='#96e4ff'
 		self.frame1.place(rely=0, relx=0, relheight=0.4, relwidth=1)
 
-		self.frame2 = tk.Frame(self.root, bg='#96e4ff', bd=5)
+		self.frame2 = tk.Frame(self.root, bd=5) # bg='#96e4ff'
 		self.frame2.place(rely=0.4, relx=0, relheight=0.6, relwidth=1)
 
 		# LABELS
 
 		self.location_label = ttk.Label(self.frame1, text="Location", anchor='c')
-		self.location_label.place(rely=0.1, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.location_label.place(rely=0.05, relx=0.2, relheight=0.08, relwidth=0.1)
 		self.priority_label = ttk.Label(self.frame1, text="Priority", anchor='c')
-		self.priority_label.place(rely=0.2, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.priority_label.place(rely=0.15, relx=0.2, relheight=0.08, relwidth=0.1)
 		self.openDate_label = ttk.Label(self.frame1, text="Open Date", anchor='c')
-		self.openDate_label.place(rely=0.3, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.openDate_label.place(rely=0.25, relx=0.2, relheight=0.08, relwidth=0.1)
 		self.issue_label = ttk.Label(self.frame1, text="Issue", anchor='c')
-		self.issue_label.place(rely=0.4, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.issue_label.place(rely=0.35, relx=0.2, relheight=0.08, relwidth=0.1)
 		self.tech_label = ttk.Label(self.frame1, text="Assigned Tech", anchor='c')
-		self.tech_label.place(rely=0.5, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.tech_label.place(rely=0.45, relx=0.2, relheight=0.08, relwidth=0.1)
 		self.fix_label = ttk.Label(self.frame1, text="Fix", anchor='c')
-		self.fix_label.place(rely=0.6, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.fix_label.place(rely=0.55, relx=0.2, relheight=0.08, relwidth=0.1)
 		self.fixDate_label = ttk.Label(self.frame1, text="Fix Date", anchor='c')
-		self.fixDate_label.place(rely=0.7, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.fixDate_label.place(rely=0.65, relx=0.2, relheight=0.08, relwidth=0.1)
 		self.closed_label = ttk.Label(self.frame1, text="Closed", anchor='c')
-		self.closed_label.place(rely=0.8, relx=0.2, relheight=0.08, relwidth=0.1)
+		self.closed_label.place(rely=0.75, relx=0.2, relheight=0.08, relwidth=0.1)
 
 		# ENTRY FIELDS
 
 		self.location_entry = ttk.Entry(self.frame1)
-		self.location_entry.place(rely=0.1, relx=0.3, relheight=0.08, relwidth=0.35)
+		self.location_entry.place(rely=0.05, relx=0.3, relheight=0.08, relwidth=0.35)
 		self.priority_entry = ttk.Entry(self.frame1)
-		self.priority_entry.place(rely=0.2, relx=0.3, relheight=0.08, relwidth=0.35)
+		self.priority_entry.place(rely=0.15, relx=0.3, relheight=0.08, relwidth=0.35)
 		self.openDate_entry = DateEntry(self.frame1)
-		self.openDate_entry.place(rely=0.3, relx=0.3, relheight=0.08, relwidth=0.35)
+		self.openDate_entry.place(rely=0.25, relx=0.3, relheight=0.08, relwidth=0.35)
 		self.issue_entry = ttk.Entry(self.frame1)
-		self.issue_entry.place(rely=0.4, relx=0.3, relheight=0.08, relwidth=0.35)
+		self.issue_entry.place(rely=0.35, relx=0.3, relheight=0.08, relwidth=0.35)
 		self.tech_entry = ttk.Entry(self.frame1)
-		self.tech_entry.place(rely=0.5, relx=0.3, relheight=0.08, relwidth=0.35)
+		self.tech_entry.place(rely=0.45, relx=0.3, relheight=0.08, relwidth=0.35)
 		self.fix_entry = ttk.Entry(self.frame1)
-		self.fix_entry.place(rely=0.6, relx=0.3, relheight=0.08, relwidth=0.35)
+		self.fix_entry.place(rely=0.55, relx=0.3, relheight=0.08, relwidth=0.35)
 		self.fixDate_entry = DateEntry(self.frame1)
-		self.fixDate_entry.place(rely=0.7, relx=0.3, relheight=0.08, relwidth=0.35)
+		self.fixDate_entry.place(rely=0.65, relx=0.3, relheight=0.08, relwidth=0.35)
 		self.fixDate_entry.delete(0, tk.END)
 		self.closedEntry = tk.IntVar() 
 		self.closed_entry = tk.Checkbutton(self.frame1, variable=self.closedEntry, onvalue=1, offvalue=0, relief=tk.SOLID)
-		self.closed_entry.place(rely=0.8, relx=0.3, relheight=0.08, relwidth=0.35)
+		self.closed_entry.place(rely=0.75, relx=0.3, relheight=0.08, relwidth=0.35)
 
 		# BUTTONS
 
@@ -97,16 +97,6 @@ class Application(tk.Frame):
 		for i in range(9):
 			x = ("#" + str(i))
 			self.tree.column(x, stretch=tk.YES)
-
-		# self.tree.column('#0', stretch=tk.YES)
-		# self.tree.column('#1', stretch=tk.YES)
-		# self.tree.column('#2', stretch=tk.YES)
-		# self.tree.column('#3', stretch=tk.YES)
-		# self.tree.column('#4', stretch=tk.YES)
-		# self.tree.column('#5', stretch=tk.YES)
-		# self.tree.column('#6', stretch=tk.YES)
-		# self.tree.column('#7', stretch=tk.YES)
-		# self.tree.column('#8', stretch=tk.YES)
 
 		self.tree.place(rely=0, relx=0, relwidth=1, relheight=1)	
 		self.treeview = self.tree

@@ -3,7 +3,9 @@ from tkinter import filedialog, messagebox, ttk
 from tkinter.commondialog import Dialog
 from tkcalendar import Calendar, DateEntry
 
-import pandas as pd 
+import pandas as pd
+
+import ViewTickets
 
 HEIGHT = 500
 WIDTH = 1000
@@ -25,7 +27,9 @@ background_image = tk.PhotoImage(file='ProfilePic.png')
 background_label = tk.Label(frame1, image=background_image, bg='#E15F5F')
 background_label.place(relwidth=1, relheight=1)
 
-### Build Menu ###
+# ===================================================================
+# 							MENU
+# ===================================================================
 
 class Message(Dialog):
     "A message box"
@@ -48,10 +52,7 @@ def aboutTracker(title="About Ticket Tracker", message="Ticket Tracker \n Versio
 	"Shows info about ticket tracker"
 	return _show(title, message)
 
-
 menubar = tk.Menu(menu_frame)
-
-
 
 # File Menu
 fileMenu = tk.Menu(menubar, tearoff=0)
@@ -69,12 +70,11 @@ menubar.add_cascade(label="Help", menu=helpMenu)
 
 root.config(menu=menubar)
 
-
-
-
-
-
-############# FUNCTIONS #####################################################
+# ===================================================================
+# ===================================================================
+# 							FUNCTIONS
+# ===================================================================
+# ===================================================================
 
 ### New Ticket Function ###
 def newTicket():
@@ -87,7 +87,7 @@ def newTicket():
 	nFrame1 = tk.LabelFrame(nTicket, text=None)
 	nFrame1.place(relwidth=1, relheight=1)
 
-	# Submit button function
+	# # Submit button function
 	def submitTicket():
 		path = "TicketTracker.ods"
 
@@ -213,50 +213,9 @@ def newTicket():
 	cButton.config(font=("Helvetica", 16))
 	cButton.place(rely=0.9, relx=0.5, anchor='center', width=700, height=50)
 
-
-### TODO: View Tickets Function ###
-def viewTickets():
-	oTicket = tk.Tk()
-	oTicket.geometry("1500x1000")
-	oTicket.pack_propagate(False)
-	oTicket.resizable(0, 0)
-
-	def clear_data():
-		tv1.delete(*tv1.get_children())
-
-	oTicket.title("All Tickets")
-
-
-	# Frame for Treeview
-	frame1 = tk.LabelFrame(oTicket, text="Ticket Data")
-	frame1.place(height=1000, width=1500)
-
-	# Treeview Widget
-	tv1 = ttk.Treeview(frame1)
-	tv1.place(relheight=1, relwidth=1)
-
-	treescrolly = tk.Scrollbar(frame1, orient="vertical", command=tv1.yview)
-	treescrollx = tk.Scrollbar(frame1, orient="horizontal", command=tv1.xview)
-	tv1.configure(xscrollcommand=treescrollx.set, yscrollcommand=treescrolly.set)
-	treescrollx.pack(side="bottom", fill="x")
-	treescrolly.pack(side="right", fill="y")
-
-	file_path = "TicketTracker.ods"
-	excel_filename = r"{}".format(file_path)
-	df = pd.read_excel(excel_filename)
-
-	clear_data()
-	tv1["column"] = list(df.columns)
-	tv1["show"] = "headings"
-	for column in tv1["columns"]:
-		tv1.heading(column, text=column)
-
-	df_rows = df.to_numpy().tolist()
-	for row in df_rows:
-		tv1.insert("", "end", values=row)
-	return None
-
-### Open Tickets Function ###
+# ===================================================================
+# 			OPEN TICKETS
+# ===================================================================
 def openTickets():
 	oTicket = tk.Tk()
 	oTicket.geometry("1500x1000")
@@ -306,24 +265,16 @@ def openTickets():
 
 ### TODO: Edit Ticket Function
 
-
-
-
-
-
-
-########### MENU BUTTONS ###########################
-
-
-
-# Ticket Tracker main menu buttons
+# ===================================================================
+# 			MENU BUTTONS
+# ===================================================================
 
 button1 = tk.Button(frame1, text='New Ticket', command=newTicket, bd=5)
 button1.place(rely=0.01, relx=0, relwidth=0.30, relheight=0.30)
 button1.config(font=("Helvetica", 18))
 
 
-button2 = tk.Button(frame1, text='View Tickets', command=viewTickets, bd=5)
+button2 = tk.Button(frame1, text='View Tickets', command=ViewTickets.viewTickets, bd=5)
 button2.place(rely=0.01, relx=0.35, relwidth=0.30, relheight=0.30)
 button2.config(font=("Helvetica", 18))
 
@@ -343,6 +294,7 @@ button6 = tk.Button(frame1, text='Quit', command=root.quit, bd=5)
 button6.place(rely=0.94, relx=0.70,  relwidth=0.30, relheight=0.30, anchor='sw')
 button6.config(font=("Helvetica", 18))
 
-
-
+# ===================================================================
+# END PROGRAM LOOP
+# ===================================================================
 root.mainloop()

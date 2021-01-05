@@ -22,10 +22,10 @@ class Application(tk.Frame):
 
 		# FRAMES
 
-		self.frame1 = tk.Frame(self.root, bg='#ed174b', bd=5)
+		self.frame1 = tk.Frame(self.root, bg='#96e4ff', bd=5)
 		self.frame1.place(rely=0, relx=0, relheight=0.4, relwidth=1)
 
-		self.frame2 = tk.Frame(self.root, bg='#ed174b', bd=5)
+		self.frame2 = tk.Frame(self.root, bg='#96e4ff', bd=5)
 		self.frame2.place(rely=0.4, relx=0, relheight=0.6, relwidth=1)
 
 		# LABELS
@@ -155,6 +155,8 @@ class Application(tk.Frame):
 	def Update(self):
 		for idx, node in enumerate(self.treeview.get_children()):
 			self.tree.item(node)
+
+	
 
 
 app = Application(tk.Tk())
